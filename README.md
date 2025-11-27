@@ -41,3 +41,17 @@ terraform plan
 terraform apply -auto-approve
 ```
 
+## Part 3 – Deployment (Helm)
+
+As per the challenge requirements, we created a Helm chart to deploy the Dockerized application into the `devops-challenge` namespace.
+
+### Helm Chart Includes:
+- `Chart.yaml` → Helm metadata
+- `values.yaml` → Image tag, replica count, and security context values
+- `templates/deployment.yaml` → Kubernetes Deployment manifest
+- `templates/service.yaml` → Kubernetes Service manifest
+
+The required `securityContext` configuration (non-root user, read-only root filesystem) is embedded directly inside the `deployment.yaml` under the container spec, and its values are parameterized via `values.yaml`.
+
+
+
