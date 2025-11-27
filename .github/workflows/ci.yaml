@@ -2,18 +2,16 @@ name: CI
 
 on:
   push:
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
-  ci:
+  # Stage 1: Linting
+  lint:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the code
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # Lint Python (flake8)
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -25,18 +23,24 @@ jobs:
       - name: Lint Python
         run: flake8 app
 
-      # Lint Helm chart
       - name: Install Helm
         uses: azure/setup-helm@v4
 
       - name: Lint Helm chart
         run: helm lint helm/devops-app
 
-      # Validate Terraform syntax
+  # Stage 2: Terraform Validation
+  terraform:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform init (needed before validate)
+      - name: Terraform init
         working-directory: terraform
         run: terraform init -backend=false
 
@@ -44,7 +48,14 @@ jobs:
         working-directory: terraform
         run: terraform validate
 
-      # Build and Push Docker image
+  # Stage 3: Docker Build & Push
+  docker:
+    runs-on: ubuntu-latest
+    needs: terraform
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
@@ -53,3 +64,5 @@ jobs:
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/devops-challenge:latest
+
+  
