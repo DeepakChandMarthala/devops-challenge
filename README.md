@@ -24,6 +24,8 @@ docker build -t devops-challenge:latest .
 ```bash
 docker run -p 8080:80 devops-challenge:latest
 ```
+<img width="987" height="555" alt="image" src="https://github.com/user-attachments/assets/2272d419-532c-4d85-b20e-6dda8d4be128" />
+
 
 ## Part 2 – Infrastructure (Terraform)
 
@@ -100,6 +102,7 @@ This script ensures that the container meets security requirements and that the 
 chmod +x system-checks.sh
 ./system-checks.sh
 ```
+
 
 
 
