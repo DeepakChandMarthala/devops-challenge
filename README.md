@@ -82,7 +82,24 @@ This script ensures reproducibility and simplifies manual deployment steps into 
 ```bash
 chmod +x setup.sh
 ./setup.sh
+```
 
+## Part 5 – Validation Script (`system-checks.sh`)
+
+A validation script is provided to verify key runtime properties of the deployed application inside the Kubernetes pod.
+
+### Checks Performed:
+1. Verify container is running as a non-root user (`UID: 1000`)
+2. Confirm which port the application is listening on (from pod spec)
+3. Use `curl` via port-forwarding to validate the API response
+
+This script ensures that the container meets security requirements and that the application is reachable and functioning correctly.
+
+### Run Locally
+```bash
+chmod +x system-checks.sh
+./system-checks.sh
+```
 
 
 
