@@ -18,3 +18,10 @@ A simple Python application is containerized using a Dockerfile.
 ### Build Docker Image Locally
 ```bash
 docker build -t devops-challenge:latest .
+```
+## Run Application Locally
+
+```bash
+docker run -p 8080:80 devops-challenge:latest
+```
+
