@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Lint Python (flake8)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: Lint Python
+        run: flake8 app
+
+      # Lint Helm chart
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Lint Helm chart
+        run: helm lint helm/devops-app
+
+      # Validate Terraform syntax
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init (needed before validate)
+        working-directory: terraform
+        run: terraform init -backend=false
+
+      - name: Terraform validate
+        working-directory: terraform
+        run: terraform validate
+
+      # Build Docker image (no push)
+      - name: Build Docker image
+        run: docker build -t devops-challenge:latest .
+
+
