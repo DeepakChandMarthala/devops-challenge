@@ -25,3 +25,19 @@ docker build -t devops-challenge:latest .
 docker run -p 8080:80 devops-challenge:latest
 ```
 
+## Part 2 – Infrastructure (Terraform)
+
+Using Terraform, a namespace and memory ResourceQuota are created inside the Kubernetes cluster.
+
+### Resources Created
+- Namespace: `devops-challenge`
+- ResourceQuota: memory limited to `512Mi`
+
+### 🛠 Terraform Commands
+```bash
+cd terraform
+terraform init
+terraform plan
+terraform apply -auto-approve
+```
+
