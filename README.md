@@ -55,7 +55,7 @@ The required `securityContext` configuration (non-root user, read-only root file
 
 ## Part 4 – Automation (CI/CD)
 
-A GitHub Actions workflow (`.github/workflows/ci.yml`) is configured to automate validation and packaging steps on every push.
+  a) A GitHub Actions workflow (`.github/workflows/ci.yml`) is configured to automate validation and packaging steps on every push.
 
 ### CI Pipeline Tasks:
 - Checkout source code
@@ -66,6 +66,23 @@ A GitHub Actions workflow (`.github/workflows/ci.yml`) is configured to automate
 - Docker image push to Docker Hub (optional)
 
 This pipeline ensures that every commit is validated and packaged consistently.
+
+  b) Local Deployment Automation (`setup.sh`)
+
+A local automation script (`setup.sh`) is provided to streamline the full deployment process from a developer machine.
+
+### Script Workflow:
+- Build Docker image
+- Apply Terraform (namespace + ResourceQuota)
+- Deploy Helm chart into EKS cluster with setup.sh
+
+This script ensures reproducibility and simplifies manual deployment steps into a single command.
+
+### Run Locally
+```bash
+chmod +x setup.sh
+./setup.sh
+
 
 
 
