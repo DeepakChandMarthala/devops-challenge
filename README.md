@@ -49,17 +49,18 @@ terraform plan
 terraform apply -auto-approve
 ```
 
-Installed kubectl and eksctl on my laptop to communicate with cluster from local itself.
+### Installed kubectl and eksctl on my laptop to communicate with cluster from local itself.
 <img width="964" height="542" alt="image" src="https://github.com/user-attachments/assets/836978a4-aec6-410e-8716-9d55b56d6371" />
 
-creating cluster
+### creating cluster
 <img width="1020" height="574" alt="image" src="https://github.com/user-attachments/assets/fe56a118-0a32-4ea3-b2aa-581ae0bd617a" />
 
 <img width="1027" height="577" alt="image" src="https://github.com/user-attachments/assets/503cac82-e7be-4d7a-9357-bbaf1489063d" />
 
 <img width="1044" height="587" alt="image" src="https://github.com/user-attachments/assets/c708551b-b259-455e-aa78-473a738236d8" />
 
-creating namespace with Terraform script
+### creating namespace with Terraform script
+
 <img width="1014" height="570" alt="image" src="https://github.com/user-attachments/assets/a6129d90-1eab-41ff-9446-49d5db347006" />
 
 
@@ -89,7 +90,7 @@ The required `securityContext` configuration (non-root user, read-only root file
 
 This pipeline ensures that every commit is validated and packaged consistently.
 
-Pipeline Successful, ran checks, then built and pushed image to docker hub
+### Pipeline Successful, ran checks, then built and pushed image to docker hub
 <img width="1040" height="467" alt="image" src="https://github.com/user-attachments/assets/5e617648-b1ed-4737-ae93-7e2dd208f341" />
 
 <img width="1035" height="582" alt="image" src="https://github.com/user-attachments/assets/5ff226cd-d168-48c7-8bb9-4f919e4b4d63" />
@@ -143,6 +144,7 @@ chmod +x system-checks.sh
 <img width="1125" height="632" alt="image" src="https://github.com/user-attachments/assets/1d5b588a-55c7-46ec-be26-ad12d2330e7a" />
 
 <img width="1125" height="632" alt="image" src="https://github.com/user-attachments/assets/2699ef28-66e6-474d-bb14-dc93bd62577e" />
+
 
 
 
