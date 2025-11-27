@@ -53,5 +53,21 @@ As per the challenge requirements, we created a Helm chart to deploy the Dockeri
 
 The required `securityContext` configuration (non-root user, read-only root filesystem) is embedded directly inside the `deployment.yaml` under the container spec, and its values are parameterized via `values.yaml`.
 
+## Part 4 – Automation (CI/CD)
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) is configured to automate validation and packaging steps on every push.
+
+### CI Pipeline Tasks:
+- Checkout source code
+- Python linting using `flake8`
+- Helm chart linting
+- Terraform syntax validation
+- Docker image build
+- Docker image push to Docker Hub (optional)
+
+This pipeline ensures that every commit is validated and packaged consistently.
+
+
+
 
 
